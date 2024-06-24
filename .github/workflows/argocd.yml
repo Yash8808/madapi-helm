@@ -8,7 +8,7 @@ on:
 env:
   RESOURCE_GROUP: sandbox
   CLUSTER_NAME: "githubactionpoc"
-  CHART_PATH: "news-app"
+  CHART_PATH: "argo-cd"
   CHART_OVERRIDE_PATH: "values/argocd/values.yaml"
 
 jobs:
