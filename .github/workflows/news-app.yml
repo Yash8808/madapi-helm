@@ -5,12 +5,11 @@ on:
     branches:
         - sandbox
         - preprod
-
 env:
   RESOURCE_GROUP: sandbox
   CLUSTER_NAME: "githubactionpoc"
   CHART_PATH: "news-app"
-  CHART_OVERRIDE_PATH: "news-app/values.yaml"
+  CHART_OVERRIDE_PATH: "values/${{ github.head_ref || github.ref_name }}/news-app-values.yaml"
 
 jobs:
   helm-deploy:
@@ -62,3 +61,4 @@ jobs:
         with:
           action: deploy
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
+          namespace: ${{ github.head_ref || github.ref_name }}
