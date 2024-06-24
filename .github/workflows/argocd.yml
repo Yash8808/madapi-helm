@@ -61,4 +61,3 @@ jobs:
         with:
           action: deploy
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
-          namespace: ${{ github.head_ref || github.ref_name }}
