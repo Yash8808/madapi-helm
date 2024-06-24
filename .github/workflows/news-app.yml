@@ -53,7 +53,7 @@ jobs:
           helmChart: ${{ env.CHART_PATH }}
           overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
           releaseName: "newsapp"
-          helm-version: "3.13.1"
+          helm-version: "v3.13.1+g3547a4b"
         id: bake
 
       # Deploys application based on manifest files from previous step
