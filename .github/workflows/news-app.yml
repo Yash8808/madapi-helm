@@ -9,7 +9,7 @@ env:
   RESOURCE_GROUP: sandbox
   CLUSTER_NAME: "githubactionpoc"
   CHART_PATH: "news-app"
-  CHART_OVERRIDE_PATH: "values/${{ github.head_ref || github.ref_name }}/news-app-values.yaml"
+  CHART_OVERRIDE_PATH: "values/news-app/${{ github.head_ref || github.ref_name }}/values.yaml"
 
 jobs:
   helm-deploy:

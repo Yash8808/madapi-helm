@@ -8,7 +8,7 @@ image:
   repository: yash8808/webapp
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: dc2507b
+  tag: 089dedf
 
 #arguments: ['--log-driver', 'awslogs', '--log-opt awslogs-region', 'us-east-1', '--log-opt awslogs-group', 'myLogGroup', '--log-opt awslogs-create-group','true']
 
