@@ -1,6 +1,7 @@
 trigger:
   branches:
     include:
+      - sandbox
       - preprod
 
 # Use the Default agent pool
@@ -27,11 +28,11 @@ jobs:
   - task: HelmDeploy@0
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceConnection: 'preprod-deploy'
-      namespace: 'preprod'
+      kubernetesServiceConnection: '$(Build.SourceBranchName)-deploy'
+      namespace: '$(Build.SourceBranchName)'
       command: 'upgrade'
       chartType: 'FilePath'
       chartPath: './news-app'
       releaseName: 'newsapp'
       install: true
-      valueFile: './values/news-app/preprod/values.yaml'
+      valueFile: './values/news-app/$(Build.SourceBranchName)/values.yaml'
