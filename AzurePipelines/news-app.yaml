@@ -1,8 +1,6 @@
 trigger:
-  branches:
-    include:
-      - sandbox
-      - preprod
+  - sandbox
+  - preprod
 
 pool:
   name: 'Default'
