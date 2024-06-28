@@ -4,11 +4,9 @@ trigger:
       - sandbox
       - preprod
 
-# Use the Default agent pool
 pool:
   name: 'Default'
 
-# Use the self-hosted agent named 'selfhosted'
 jobs:
 - job: BuildAndDeploy
   displayName: 'Build and Deploy Job'
