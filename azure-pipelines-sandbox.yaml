@@ -7,10 +7,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: UseHelmInstaller@1
-  inputs:
-    helmVersionToInstall: 'latest'
-
 - checkout: self
   fetchDepth: 0
 
