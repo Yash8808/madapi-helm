@@ -1,0 +1,33 @@
+trigger:
+  - sandbox
+
+pool:
+  name: 'Default'
+
+jobs:
+- job: DeployHelm
+  displayName: 'Deploy Helm'
+  pool:
+    name: Default
+    demands:
+      - agent.name -equals selfhosted
+
+  steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: HelmInstaller@1
+    inputs:
+      helmVersion: '3.15.2'
+
+  - task: HelmDeploy@0
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceConnection: 'argocd-deploy'
+      namespace: 'default'
+      command: 'upgrade'
+      chartType: 'FilePath'
+      chartPath: './argo-cd'
+      releaseName: 'argocd'
+      install: true
+      valueFile: './values/argocd/values.yaml'
