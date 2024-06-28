@@ -3,11 +3,19 @@ trigger:
     include:
       - sandbox
 
+# Use the Default agent pool
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Default'
 
+# Use the self-hosted agent named 'selfhosted'
 jobs:
-- job: DeployHelm
+- job: BuildAndDeploy
+  displayName: 'Build and Deploy Job'
+  pool:
+    name: Default
+    demands:
+      - agent.name -equals selfhosted
+
   steps:
   - checkout: self
     fetchDepth: 0
