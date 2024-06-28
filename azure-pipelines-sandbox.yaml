@@ -4,7 +4,7 @@ trigger:
       - sandbox
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Azure Pipelines'
 
 steps:
 - checkout: self
