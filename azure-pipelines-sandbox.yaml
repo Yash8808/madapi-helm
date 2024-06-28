@@ -1,0 +1,37 @@
+trigger:
+  branches:
+    include:
+      - sandbox
+
+# Use the Default agent pool
+pool:
+  name: 'Default'
+
+# Use the self-hosted agent named 'selfhosted'
+jobs:
+- job: BuildAndDeploy
+  displayName: 'Build and Deploy Job'
+  pool:
+    name: Default
+    demands:
+      - agent.name -equals selfhosted
+
+  steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: HelmInstaller@1
+    inputs:
+      helmVersion: '3.15.2'
+
+  - task: HelmDeploy@0
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceConnection: 'sandbox-deploy'
+      namespace: 'sandbox'
+      command: 'upgrade'
+      chartType: 'FilePath'
+      chartPath: './news-app'
+      releaseName: 'newsapp'
+      install: true
+      valueFile: './values/news-app/sandbox/values.yaml'
