@@ -5,8 +5,8 @@ pool:
   name: 'Default'
 
 jobs:
-- job: BuildAndDeploy
-  displayName: 'Build and Deploy Job'
+- job: DeployHelm
+  displayName: 'Deploy Helm'
   pool:
     name: Default
     demands:
