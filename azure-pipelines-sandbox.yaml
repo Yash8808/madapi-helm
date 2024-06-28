@@ -4,24 +4,26 @@ trigger:
       - sandbox
 
 pool:
-  name: 'Azure Pipelines'
+  vmImage: 'ubuntu-latest'
 
-steps:
-- checkout: self
-  fetchDepth: 0
+jobs:
+- job: DeployHelm
+  steps:
+  - checkout: self
+    fetchDepth: 0
 
-- task: HelmInstaller@1
-  inputs:
-    helmVersion: '3.15.2'
+  - task: HelmInstaller@1
+    inputs:
+      helmVersion: '3.15.2'
 
-- task: HelmDeploy@0
-  inputs:
-    connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceConnection: 'sandbox-deploy'
-    namespace: 'sandbox'
-    command: 'upgrade'
-    chartType: 'FilePath'
-    chartPath: './news-app'
-    releaseName: 'newsapp'
-    install: true
-    valueFile: './values/news-app/sandbox/values.yaml'
+  - task: HelmDeploy@0
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceConnection: 'sandbox-deploy'
+      namespace: 'sandbox'
+      command: 'upgrade'
+      chartType: 'FilePath'
+      chartPath: './news-app'
+      releaseName: 'newsapp'
+      install: true
+      valueFile: './values/news-app/sandbox/values.yaml'
